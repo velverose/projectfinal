@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BrightStudio — Креативный проект</title>
+  <title>BrightStudio — креативная фотостудия</title>
   <style>
     html, body {
       margin: 0;
@@ -12,6 +12,7 @@
       font-family: "Inter", sans-serif;
       color: #0b1220;
       scroll-behavior: smooth;
+      background: #fff;
     }
     :root {
       --accent-1:#ff6fa3;
@@ -21,10 +22,8 @@
       --shadow-sm:0 0.6rem 2rem rgba(2,6,23,0.08);
     }
 
-    /* ---------- BASE LAYOUT ---------- */
-    #wrapper {
-      transition: transform .8s ease;
-    }
+    #wrapper { transition: transform .8s ease; }
+
     .section {
       height: 100vh;
       display: flex;
@@ -35,49 +34,38 @@
       opacity: 0;
       transform: translateY(60px);
       transition: all .8s ease;
+      text-align: center;
     }
-    .section.active {
-      opacity: 1;
-      transform: translateY(0);
+    .section.active { opacity: 1; transform: translateY(0); }
+
+    .section-title {
+      font-size:3rem;
+      margin-bottom:1.2rem;
+      font-weight:800;
+      text-transform:uppercase;
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
-    .section-title {font-size:2.4rem;margin-bottom:1.6rem;}
+
     .cta{
-      display:inline-flex;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      color:#fff;padding:.9rem 1.4rem;border-radius:1.2rem;font-weight:700;
-      border:none;cursor:pointer;font-size:1.4rem;
+      display:inline-flex;
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color:#fff;
+      padding:.9rem 1.6rem;
+      border-radius:1.2rem;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      font-size:1.4rem;
       box-shadow:0 .8rem 2.4rem rgba(124,92,255,0.12);
     }
-
-    /* ---------- CONTACT FORM ---------- */
-    .contact__form{background:#fff;padding:2rem;border-radius:1rem;box-shadow:var(--shadow-sm);width:90%;max-width:36rem;}
-    .field{display:flex;flex-direction:column;margin-bottom:1rem}
-    label{font-weight:600;font-size:1.4rem}
-    input,textarea{padding:1rem;border-radius:1rem;border:.1rem solid #ddd;font-size:1.4rem}
-    .form-actions{margin-top:1rem;display:flex;gap:1rem;align-items:center}
-    .note{font-size:1.3rem;color:var(--muted)}
-
-    /* ---------- MODAL ---------- */
-    .modal-backdrop{
-      position:fixed;inset:0;background:rgba(0,0,0,0.5);
-      display:none;align-items:center;justify-content:center;z-index:9999;
-    }
-    .modal{
-      background:#fff;padding:2.4rem 2rem;border-radius:1rem;box-shadow:var(--shadow-sm);
-      text-align:center;max-width:36rem;width:90%;
-      transform:translateY(2rem);opacity:0;transition:all .3s ease;
-    }
-    .modal.show{transform:translateY(0);opacity:1;}
-    .modal-backdrop.active{display:flex;}
-    .modal h3{margin:0 0 1rem;font-size:1.8rem}
-    .modal p{margin:0 0 1.4rem;color:var(--muted)}
-    .modal button{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));border:none;
-      color:#fff;padding:.8rem 1.6rem;border-radius:1rem;cursor:pointer;font-weight:600;}
 
     /* ---------- ACCORDION ---------- */
     .accordion {
       display: flex;
       width: 90%;
-      max-width: 900px;
+      max-width: 1000px;
       overflow: hidden;
       border-radius: 1rem;
       box-shadow: var(--shadow-sm);
@@ -105,13 +93,14 @@
       color: #fff;
       padding: 1rem;
       transition: width .5s ease;
+      font-size:1.4rem;
     }
     .accordion-item.active {flex: 3;}
     .accordion-item.active .content {width: 100%;}
     @media(max-width:768px){
       .accordion{flex-direction:column;height:auto;}
       .accordion-item{flex:none;height:20vh;}
-      .accordion-item.active{height:40vh;}
+      .accordion-item.active{height:45vh;}
       .accordion-item .content{width:100%;height:0;transition:height .4s ease;}
       .accordion-item.active .content{height:100%;}
     }
@@ -134,6 +123,43 @@
       margin-top: 1rem;
     }
 
+    /* ---------- CONTACT FORM ---------- */
+    .contact__form{
+      background:#fff;
+      padding:2rem;
+      border-radius:1rem;
+      box-shadow:var(--shadow-sm);
+      width:90%;
+      max-width:36rem;
+    }
+    .field{display:flex;flex-direction:column;margin-bottom:1rem}
+    label{font-weight:600;font-size:1.4rem}
+    input,textarea{
+      padding:1rem;border-radius:1rem;border:.1rem solid #ddd;font-size:1.4rem;
+    }
+    .form-actions{margin-top:1rem;display:flex;gap:1rem;align-items:center}
+    .note{font-size:1.3rem;color:var(--muted)}
+
+    /* ---------- MODAL ---------- */
+    .modal-backdrop{
+      position:fixed;inset:0;background:rgba(0,0,0,0.5);
+      display:none;align-items:center;justify-content:center;z-index:9999;
+    }
+    .modal{
+      background:#fff;padding:2.4rem 2rem;border-radius:1rem;box-shadow:var(--shadow-sm);
+      text-align:center;max-width:36rem;width:90%;
+      transform:translateY(2rem);opacity:0;transition:all .3s ease;
+    }
+    .modal.show{transform:translateY(0);opacity:1;}
+    .modal-backdrop.active{display:flex;}
+    .modal h3{margin:0 0 1rem;font-size:1.8rem}
+    .modal p{margin:0 0 1.4rem;color:var(--muted)}
+    .modal button{
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      border:none;color:#fff;padding:.8rem 1.6rem;
+      border-radius:1rem;cursor:pointer;font-weight:600;
+    }
+
     /* ---------- MAP ---------- */
     #map {
       width: 90%;
@@ -148,54 +174,61 @@
 
     <!-- SECTION 1: Accordion -->
     <section class="section active" id="section1">
-      <h2 class="section-title">Горизонтальный аккордеон</h2>
+      <h2 class="section-title">Наши направления</h2>
       <div class="accordion">
         <div class="accordion-item active">
-          <img src="https://picsum.photos/500/400?random=1" alt="">
-          <div class="content">Первый блок контента</div>
+          <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=800&q=80" alt="">
+          <div class="content">Fashion & Model съёмки — создаём стильные кадры для брендов и портфолио.</div>
         </div>
         <div class="accordion-item">
-          <img src="https://picsum.photos/500/400?random=2" alt="">
-          <div class="content">Второй блок контента</div>
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="">
+          <div class="content">Love Story — романтичные фото и видео-сессии для влюблённых пар.</div>
         </div>
         <div class="accordion-item">
-          <img src="https://picsum.photos/500/400?random=3" alt="">
-          <div class="content">Третий блок контента</div>
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80" alt="">
+          <div class="content">Съёмка мероприятий и концертов — живые эмоции, движение и свет.</div>
         </div>
       </div>
     </section>
 
     <!-- SECTION 2: OnePageScroll -->
     <section class="section" id="section2" style="background:#f9f9ff;">
-      <h2 class="section-title">OnePage Scroll</h2>
-      <p>Прокручивай колесо мыши или свайпай вниз/вверх для смены секции.</p>
+      <h2 class="section-title">О студии BrightStudio</h2>
+      <p style="max-width:600px;font-size:1.6rem;color:var(--muted);">
+        Мы — команда профессиональных фотографов и видеографов.  
+        Работаем по всей России и за её пределами.  
+        Снимаем для брендов, моделей, блогеров и журналов.  
+        Наши кадры — это энергия, стиль и живые эмоции.
+      </p>
     </section>
 
     <!-- SECTION 3: Video Player -->
     <section class="section" id="section3">
-      <h2 class="section-title">HTML5 Видео</h2>
+      <h2 class="section-title">Промо-видео о нашей работе</h2>
       <div class="video-box">
-        <video id="myVideo" src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
+        <video id="myVideo" src="https://cdn.pixabay.com/vimeo/385857143/production_id_4062703.mp4?width=640&hash=6e8adf88cfc5f54a2b6cf0f6f1ec9ac07aee4b7f" poster="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=900&q=80"></video>
         <div class="controls">
-          <button class="cta" id="playBtn">▶️ Play</button>
-          <button class="cta" id="pauseBtn">⏸ Pause</button>
+          <button class="cta" id="playBtn">▶️ Воспроизвести</button>
+          <button class="cta" id="pauseBtn">⏸ Пауза</button>
         </div>
       </div>
     </section>
 
     <!-- SECTION 4: Map -->
     <section class="section" id="section4" style="background:#f8f8f8;">
-      <h2 class="section-title">Карта</h2>
+      <h2 class="section-title">Мы на карте</h2>
+      <p style="font-size:1.4rem;color:var(--muted);margin-bottom:1rem;">Наш офис — Москва, наб. Пресненская, 12</p>
       <div id="map"></div>
     </section>
 
     <!-- SECTION 5: Contact Form -->
     <section class="section" id="section5">
-      <h2 class="section-title">Форма заказа проекта</h2>
+      <h2 class="section-title">Заказать фотосессию</h2>
+      <p style="font-size:1.5rem;color:var(--muted);margin-bottom:1rem;">Заполните форму, и мы подберём идеальный формат съёмки под ваши цели.</p>
       <form id="contactForm" class="contact__form" novalidate>
         <div class="field">
           <label for="name">Имя</label>
-          <input id="name" name="name" type="text" required placeholder="Как к вам обращаться?">
+          <input id="name" name="name" type="text" required placeholder="Ваше имя">
         </div>
         <div class="field">
           <label for="phone">Телефон</label>
@@ -203,9 +236,9 @@
         </div>
         <div class="field">
           <label for="comment">Комментарий</label>
-          <textarea id="comment" name="comment" rows="4" required placeholder="Кратко о задаче"></textarea>
+          <textarea id="comment" name="comment" rows="4" required placeholder="Опишите съёмку или пожелания"></textarea>
         </div>
-        <input type="hidden" name="to" value="example@mail.com">
+        <input type="hidden" name="to" value="studio@brightstudio.ru">
         <div class="form-actions">
           <button type="submit" class="cta">Отправить заявку</button>
           <div class="note" id="formNote">Мы ответим в течение рабочего дня.</div>
@@ -234,7 +267,7 @@
       });
     });
 
-    /* ---------- 2. OnePageScroll with animation ---------- */
+    /* ---------- 2. OnePageScroll with fade animation ---------- */
     const sections = document.querySelectorAll('.section');
     let index = 0, scrolling = false;
     function setActiveSection(i){
@@ -261,13 +294,13 @@
     /* ---------- 4. Map ---------- */
     ymaps.ready(()=>{
       const map = new ymaps.Map('map', {
-        center: [55.751244, 37.618423],
-        zoom: 10
+        center: [55.749473, 37.537972],
+        zoom: 12
       });
-      const placemark = new ymaps.Placemark([55.751244,37.618423], {
-        balloonContent: 'BrightStudio'
+      const placemark = new ymaps.Placemark([55.749473,37.537972], {
+        balloonContent: 'BrightStudio — фотостудия'
       }, {
-        preset: 'islands#violetIcon'
+        preset: 'islands#pinkIcon'
       });
       map.geoObjects.add(placemark);
     });
@@ -294,12 +327,12 @@
         return;
       }
       await new Promise(r=>setTimeout(r,1000));
-      const isSuccess = Math.random()>0.5;
+      const isSuccess = Math.random()>0.3;
       if(isSuccess){
-        showModal('Успех!', 'Сообщение успешно отправлено. Мы скоро свяжемся.', true);
+        showModal('Спасибо!', 'Ваша заявка отправлена! Мы свяжемся с вами в ближайшее время.', true);
         form.reset();
       } else {
-        showModal('Ошибка!', 'Произошла ошибка при отправке. Попробуйте позже.', false);
+        showModal('Ошибка!', 'Не удалось отправить заявку. Попробуйте позже.', false);
       }
       note.textContent='Мы ответим в течение рабочего дня.';
     });
