@@ -245,6 +245,34 @@
         </div>
       </form>
     </section>
+
+    <!-- SECTION 6: User Registration -->
+    <section class="section" id="section6" style="background:#fff;">
+      <h2 class="section-title">Регистрация пользователей</h2>
+      <form id="userForm" class="contact__form" novalidate>
+        <div class="field">
+          <label for="regName">Имя</label>
+          <input id="regName" type="text" required placeholder="Имя">
+        </div>
+        <div class="field">
+          <label for="regEmail">Email</label>
+          <input id="regEmail" type="email" required placeholder="Email">
+        </div>
+        <div class="field">
+          <label for="regAge">Возраст</label>
+          <input id="regAge" type="number" required placeholder="Возраст">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="cta">Добавить</button>
+          <button type="button" id="exportBtn" class="cta">Экспортировать в Excel</button>
+          <div class="note" id="regNote">Сохранённые пользователи в локальном хранилище.</div>
+        </div>
+      </form>
+      <table id="userTable" style="width:90%;max-width:900px;margin-top:1rem;border-collapse:collapse;">
+        <thead><tr><th>Имя</th><th>Email</th><th>Возраст</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
   </div>
 
   <!-- MODAL -->
@@ -258,6 +286,7 @@
 
   <!-- SCRIPTS -->
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script>
     /* ---------- 1. Accordion ---------- */
     document.querySelectorAll('.accordion-item').forEach(item=>{
@@ -349,6 +378,55 @@
     }
     modalClose.addEventListener('click', closeModal);
     modalBackdrop.addEventListener('click', e=>{if(e.target===modalBackdrop)closeModal();});
+
+    /* ---------- 6. User registration (from ex.html) ---------- */
+    const userForm = document.getElementById('userForm');
+    const userTableBody = document.querySelector('#userTable tbody');
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    function renderUsers(){
+      if(!userTableBody) return;
+      userTableBody.innerHTML = '';
+      users.forEach(u => {
+        const row = `<tr><td>${u.name}</td><td>${u.email}</td><td>${u.age}</td></tr>`;
+        userTableBody.insertAdjacentHTML('beforeend', row);
+      });
+    }
+    renderUsers();
+
+    if(userForm){
+      userForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const user = {
+          name: document.getElementById('regName').value.trim(),
+          email: document.getElementById('regEmail').value.trim(),
+          age: document.getElementById('regAge').value.trim()
+        };
+        const regNote = document.getElementById('regNote');
+        if(!user.name || !user.email || !user.age){
+          if(regNote){ regNote.textContent='Заполните все поля!'; regNote.style.color='crimson'; }
+          return;
+        }
+        users.push(user);
+        localStorage.setItem('users', JSON.stringify(users));
+        renderUsers();
+        userForm.reset();
+        if(regNote){ regNote.textContent='Пользователь добавлен.'; regNote.style.color='var(--muted)'; }
+      });
+    }
+
+    const exportBtn = document.getElementById('exportBtn');
+    if(exportBtn){
+      exportBtn.addEventListener('click', ()=>{
+        if(typeof XLSX === 'undefined'){
+          alert('Библиотека XLSX не загружена.');
+          return;
+        }
+        const table = document.getElementById('userTable');
+        if(!table) return;
+        const wb = XLSX.utils.table_to_book(table);
+        XLSX.writeFile(wb, 'users.xlsx');
+      });
+    }
   </script>
 </body>
 </html>
